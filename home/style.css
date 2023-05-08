@@ -1,0 +1,70 @@
+.content .popular-movies {
+    font-size: 3rem;
+    color: #153243;
+    font-weight: bold;
+    padding: 50px 0 0 100px;
+}
+
+.content .movies-container {
+    display: flex;
+    padding: 35px 100px;
+    justify-content: space-between;
+}
+
+.content .movies-container .movie {
+    width: 24%;
+    height: 26rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: #CCE3DE;
+    font-size: 3rem;
+    text-align: center;
+    background-color: #153243;
+}
+
+.content .movies-container .movie:hover {
+    opacity: 90%;
+    cursor: pointer;
+}
+
+.content .movies-container .movie .info {
+    background-color: #A4C3B2;
+    width: 80%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #153243;
+}
+
+.content .movies-container .movie:hover > .info {
+    opacity: 50%;
+}
+
+@media screen and (max-width: 681px) 
+{
+    .content .popular-movies {
+        padding: 0;
+        text-align: center;
+    }
+    .content .popular-movies span {
+        font-size: 1.5rem;
+    }
+    .content .movies-container {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding: 25px 25px;
+        row-gap: 25px;
+    }
+    .content .movies-container .movie {
+        width: 7rem;
+        height: 10rem;
+        font-size: 1rem;
+    }
+    .content .movies-container .movie .info {
+        font-size: 0.8rem;
+    }
+}

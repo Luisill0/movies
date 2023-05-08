@@ -1,0 +1,134 @@
+.btn:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.content .title {
+    padding: 25px 0 0 50px;
+    font-size: 2.5em;
+    color: #153243;
+    font-weight: bold;
+}
+
+.content .centered-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 50px 0 50px;
+}
+
+.content .poster {
+    background-color: #153243;
+    color: #CCE3DE;
+    width: 15%;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content .plot {
+    background-color: #153243;
+    color: #CCE3DE;
+    width: 50%;
+    height: 18rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: #153243;
+    width: 20%;
+    border-radius: 20px;
+    overflow: none;
+}
+
+.content .stats .stat {
+    background-color: #A4C3B2;
+    color: #CCE3DE;
+    border-radius: 20px;
+    margin: 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 4rem;
+}
+
+.content .stats .reviews-number, .content .stats .rating {
+    width: 38%;
+}
+
+.content .stats .reviewBtn, .content .stats .shareBtn {
+    width: 100%;
+}
+
+.content .reviews-title {
+    font-weight: bold;
+    color: #153243;
+    padding: 50px 0 0 50px;
+    font-size: 1.5rem;
+}
+
+.content .reviews-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 25px 50px;
+}
+
+.content .reviews-section .review {
+    background-color: #153243;
+    width: 40%;
+    color: #CCE3DE;
+    border-radius: 20px;
+    padding: 5px;
+}
+@media screen and (max-width: 681px)
+{
+    .content .title {
+        font-size: 1.5rem;
+        padding: 0;
+        text-align: center;
+        padding-top: 25px;
+    }
+    .content .centered-container {
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 20px;
+    }
+    .content .centered-container .poster {
+        width: 40%;
+        height: 10rem;
+        order: 2;
+        text-align: center;
+    }
+    .content .centered-container .plot {
+        height: 10rem;
+        width: 50%;
+        order: 1;
+        text-align: center;
+    }
+    .content .centered-container .stats {
+        order:3;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .content .reviews-title {
+        padding: 0;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .content .reviews-section {
+        padding: 0;
+        justify-content: center;
+        row-gap: 25px;
+    }
+    .content .reviews-section .review {
+        width: 80%;
+    }
+}

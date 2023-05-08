@@ -1,0 +1,106 @@
+* {
+    outline: none;
+}
+
+body {
+    margin: 0; 
+    padding: 0;
+    background-color: #CCE3DE;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #153243 inset !important;
+    box-shadow: 0 0 0 30px #153243 inset !important;;
+}
+
+input:-webkit-autofill{
+    -webkit-text-fill-color: #CCE3DE !important;
+}
+
+/*https://www.w3schools.com/howto/howto_css_disable_text_selection.asp*/
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+a {
+    all:unset;
+}
+
+.header {
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: #153243;
+}
+
+.header .headerChild {
+    height: 75%;
+    border-radius: 20px;
+    background-color: #a4c3b2;
+}
+
+.searchbar {
+    width: 20%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 25px;
+}
+
+.searchbar .search-icon {
+    height: 8vh;
+    margin: 0 10px;
+}
+
+.searchbar .search-icon:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.searchbar .search-text {
+    color: #153243;
+    font-size: 25px;
+    padding-left: 15px;
+    border: 0;
+    width: 70%;
+    background-color: transparent;
+}
+
+.homeBtn {
+    width: 10%;
+    display: flex;
+    color: #153243;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+}
+
+.homeBtn:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 681px)
+{
+    .header {
+        justify-content: space-evenly;
+    }
+    .searchbar {
+        width: 60%;
+        margin: 0;
+    }
+    .homeBtn {
+        width: 30%;
+        margin: 0;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}

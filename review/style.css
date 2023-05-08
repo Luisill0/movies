@@ -1,0 +1,139 @@
+.btn:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.darkblue {
+    color:#153243;
+    font-weight: bold;
+}
+
+.content .title {
+    padding: 25px 0 0 50px;
+    font-size: 2.5em;
+    color: #153243;
+    font-weight: bold;
+}
+
+.content .centered-container {
+    display: flex;
+    justify-content: left;
+    column-gap: 100px;
+    padding: 25px 50px 0 50px;
+}
+
+.content .poster {
+    background-color: #153243;
+    color: #CCE3DE;
+    width: 15%;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content .review-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content .review-section {
+    color: #153243;
+    width: 50%;
+}
+
+.content .my-review {
+    background-color: #153243;
+    color: #CCE3DE;
+    border-radius: 20px;
+    height: 13rem;
+    padding: 25px;
+}
+
+.content .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 10rem;
+}
+
+.content .rating input{
+    background-color: #153243;
+    color:#CCE3DE;
+    width: 50px;
+    border: 0;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.content .review-btn {
+    background-color: #153243;
+    color: #CCE3DE;
+    font-size: 1.5em;
+    width: 8em;
+    height: 2em;
+    border: none;
+    border-radius: 50px;
+}
+
+.content .review-btn:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 681px)
+{
+    .content .title {
+        padding: 25px 0 0 0;
+        font-size: 1.25rem;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .content .centered-container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 15px;
+        column-gap: 0;
+    }
+    .content .centered-container .poster {
+        order: 2;
+        width: 5rem;
+        height: 8rem;
+        font-size: 0.5rem;
+        text-align: center;
+        margin-top: 5px;
+    }
+    .content .centered-container .review-section {
+        order: 1;
+        width: 65%;
+    }
+    .content .centered-container .review-section label {
+        height: 0;
+        color: #CCE3DE;
+    }
+    .content .centered-container .review-section .my-review {
+        padding: 5px;
+    }
+    .content .centered-container .form {
+        order: 3;
+        margin-top: 25px;
+        width: 100%;
+    }
+    .content .centered-container .form .rating {
+        margin: 15px 0;
+        align-items: center;
+    }
+    .content .centered-container .form .rating input {
+        height: 50px;
+    }
+    .content .centered-container .form .rating span {
+        font-size: 30px;
+    }
+    .content .centered-container .form .watched-on {
+        margin-bottom: 25px;
+    }
+    .content .centered-container .form .review-btn {
+        width: 100%;
+    }
+}

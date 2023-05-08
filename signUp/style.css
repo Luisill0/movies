@@ -1,0 +1,87 @@
+.content .sign-up {
+    font-size: 3rem;
+    color: #153243;
+    font-weight: bold;
+    padding: 50px 0 0 100px;
+}
+
+.content .credentials-form {
+    color:#153243;
+    padding: 50px 0 0 100px;
+}
+
+.content .credentials-form .input-field {
+    margin: 30px 0;
+    display: flex;
+}
+
+.content .credentials-form .input-field label {
+    font-weight: bold;
+    font-size: 2.1em;
+    width: 8em;
+}
+
+.content .credentials-form .input-field input {
+    max-width: 60%;
+    width: 50rem;
+    background-color: #153243;
+    border: none;
+    border-radius: 50px;
+    color:#CCE3DE;
+    font-size: 1.5em;
+    padding-left: 25px;
+}
+
+.content .credentials-form .password-info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    margin-bottom: 25px;
+}
+
+.content .credentials-form .password-info .red {
+    color: rgb(133, 9, 9);
+}
+
+.content .credentials-form .password-info .green {
+    color: rgb(40, 151, 28);
+}
+
+.content .credentials-form .sign-up-btn {
+    background-color: #153243;
+    color: #CCE3DE;
+    font-size: 1.5em;
+    width: 8em;
+    height: 2em;
+    border: none;
+    border-radius: 50px;
+}
+
+.content .credentials-form .sign-up-btn:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 681px)
+{
+    .content .sign-up {
+        padding: 25px 0;
+        text-align: center;
+    }
+    .content .credentials-form {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        padding-left: 25px;
+    }
+    .content .credentials-form .input-field {
+        display: flex;
+        flex-direction: column;
+        width: 120%;
+        max-width: unset;
+        margin: 20px 0;
+    }
+    .content .credentials-form .input-field label {
+        font-size: 1.25rem;
+    }
+}

@@ -1,0 +1,170 @@
+.content .title {
+    display: flex;
+    align-items: center;
+    padding: 25px 0 0 50px;
+}
+
+.content .title span {
+    font-size: 2.5rem;
+    color: #153243;
+    font-weight: bold;
+    margin-right: 25px;
+}
+
+.content .title .editBtn {
+    width: 5em;
+    height: 1.8rem;
+    color: #CCE3DE;
+    background-color: #153243;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content .title .editBtn:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.content .sections {
+    display: flex;
+}
+
+.content .sections .left {
+    padding-left: 50px;
+    width: 40%;
+}
+
+.content .sections .left .profile-photo {
+    width: 10rem;
+    height: 10rem;
+    background-color: #153243;
+    border-radius: 50%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #CCE3DE
+}
+
+.content .sections .left .favorite-films-section {
+    font-weight: bold;
+    color:#153243;
+}
+
+.content .sections .left .favorite-films {
+    display: flex;
+    column-gap: 20px;
+    margin-top: 20px;
+}
+
+.content .sections .left .favorite-films .movie {
+    width: 25%;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    background-color: #153243;
+}
+
+.content .sections .left .favorite-films .movie:hover {
+    opacity: 90%;
+    cursor: pointer;
+}
+
+.content .sections .left .favorite-films .movie .info {
+    background-color: #A4C3B2;
+    width: 80%;
+    height: 3rem;
+    display: flex;
+    font-size: small;
+    align-items: center;
+    justify-content: center;
+    color: #153243;
+}
+
+.content .sections .left .favorite-films .movie:hover > .info {
+    opacity: 50%;
+}
+
+.content .sections .right {
+    width: 50%;
+}
+
+.content .sections .right .info {
+    color:#153243;
+    font-weight: bold;
+    display: flex;
+    margin: 30px 0;
+}
+
+.content .sections .right .info span {
+    width: 8em;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.content .sections .right .info .text-box {
+    display: flex;
+    align-items: center;
+    min-height: 20px;
+    color: #CCE3DE;
+    border-radius: 15px;
+    font-size: small;
+    font-weight: 100;
+    padding-left: 20px;
+    width: 100%;
+    margin-left: 20px;
+    background-color: #153243;
+}
+
+@media screen and (max-width: 681px)
+{
+   .content .sections {
+    flex-direction: column;
+   }
+   .content .sections .left {
+    width: 100%;
+    justify-content: center;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+   .content .sections .left .favorite-films {
+    justify-content: center;
+   }
+   .content .sections .left .favorite-films .movie {
+    font-size: 0.8rem;
+    height: 9rem;
+   }
+   .content .sections .left .favorite-films .movie .info {
+    font-size: 0.6rem;
+    height: 2.5rem;
+   }
+   .content .sections .right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+   }
+   .content .sections .right .info {
+    margin: 15px 0;
+    width: 90%;
+   }
+   .content .sections .right .info span {
+    width: 5rem;
+    font-size: 0.85rem;
+    text-align: left;
+   }
+   .content .sections .right .info .text-box {
+    width: 55%;
+    font-size: 0.75rem;
+   }
+}
