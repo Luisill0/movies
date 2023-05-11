@@ -1,18 +1,40 @@
+<?php
+    if(session_status() == PHP_SESSION_NONE) {session_start();}
+    if(isset($_SESSION['current_user'])) {header('Location: http://localhost/movies');}
+    require_once("shared/DBClient.php");
+
+    if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
+        $username = strtolower($_POST['username']);
+        $email = strtolower($_POST['email']);
+        $password = $_POST['password'];
+
+        $client = new DBClient(user:'root', passwd:'');
+        $result = $client->addUser(username:$username,email:$email,password:$password);
+        if($result){
+            $_SESSION['current_user']=$result;
+            header('Location: http://localhost/movies');
+        }
+    }
+    unset($_POST['username']);
+    unset($_POST['email']);
+    unset($_POST['password']);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Movies</title>
-    <script src="/shared/script.js" type="text/javascript"></script>
-    <script src="script.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="/shared/style.css" type="text/css"/>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <script src="shared/script.js" type="text/javascript"></script>
+    <script src="scripts/signup.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="shared/style.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/signup.css" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body onload="checkPassword()">
     <div class="header">
         <div class="headerChild searchbar">
             <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="/assets/search.svg" class="search-icon"/>
+            <img src="assets/search.svg" class="search-icon"/>
         </div>
         <div class="headerChild homeBtn prevent-select"
             onclick="navigate('/home')"
@@ -24,7 +46,7 @@
         <div class="sign-up prevent-select">
             <span>Sign Up</span>
         </div>
-        <form class="credentials-form">
+        <form class="credentials-form" action="index.php" method="post">
             <div class="username input-field">
                 <label for="username" class="prevent-select">Username:</label>
                 <input type="text" id="username" name="username"

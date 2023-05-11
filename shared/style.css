@@ -5,7 +5,7 @@
 body {
     margin: 0; 
     padding: 0;
-    background-color: #CCE3DE;
+    background-color: #CCE3DE !important;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -30,6 +30,15 @@ input:-webkit-autofill{
 
 a {
     all:unset;
+}
+
+.no-focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.darkblue {
+    color: #153243;
 }
 
 .header {

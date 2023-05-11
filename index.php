@@ -1,18 +1,21 @@
+<?php
+    if(session_status() == PHP_SESSION_NONE) {session_start();}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Movies</title>
-    <script src="/shared/script.js" type="text/javascript"></script>
-    <script src="script.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="/shared/style.css" type="text/css"/>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <script src="shared/script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="shared/style.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/home.css" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>    
 <body>
     <div class="header">
         <div class="headerChild searchbar">
             <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="/assets/search.svg" class="search-icon"/>
+            <img src="assets/search.svg" class="search-icon"/>
         </div>
         <div class="headerChild homeBtn prevent-select">
             Sign In / Sign Up

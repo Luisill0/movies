@@ -65,11 +65,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
     font-size: 1.5rem;
     color: white;
     text-align: center;
     background-color: #153243;
+    background-size: cover;
+    border: 5px solid #153243;
 }
 
 .content .sections .left .favorite-films .movie:hover {
@@ -85,11 +87,13 @@
     font-size: small;
     align-items: center;
     justify-content: center;
+    margin-bottom: 2rem;
     color: #153243;
+    visibility: hidden;
 }
 
 .content .sections .left .favorite-films .movie:hover > .info {
-    opacity: 50%;
+    visibility: inherit;
 }
 
 .content .sections .right {
@@ -105,7 +109,6 @@
 
 .content .sections .right .info span {
     width: 8em;
-    text-align: center;
     font-size: 1.2em;
 }
 
