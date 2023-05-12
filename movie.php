@@ -1,21 +1,50 @@
+<?php
+    if(session_status() == PHP_SESSION_NONE) {session_start();}
+    require_once('shared/DBClient.php');
+
+    if(isset($_SESSION['current_user'])) {
+        $my_uid = $_SESSION['current_user'];
+    }
+
+    $client = new DBClient(user:'root',passwd:'');
+
+    if(isset($_GET['movie'])) {
+        $movie_title = ucwords($_GET['movie']);
+        unset($_GET['movie']);
+    }
+
+    if($movie_title){
+        echo $movie_title;
+        $row = $client->getMovieByName($movie_title);
+        if($row){
+            $title=$row['title'];
+            $poster=$row['poster'];
+            $plot=$row['plot'];
+
+            echo $title;
+            echo $poster;
+            echo $plot;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Movies</title>
-    <script src="/shared/script.js" type="text/javascript"></script>
-    <script src="script.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="/shared/style.css" type="text/css"/>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <script src="shared/script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="shared/style.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/movie.css" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
     <div class="header">
         <div class="headerChild searchbar">
             <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="/assets/search.svg" class="search-icon"/>
+            <img src="assets/search.svg" class="search-icon"/>
         </div>
         <div class="headerChild homeBtn prevent-select"
-            onclick="navigate('/home')"
+            onclick="navigate('/movies')"
         >
             Home
         </div>

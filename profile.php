@@ -57,7 +57,7 @@
     <div class="header">
         <div class="headerChild searchbar">
             <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="assets/search.svg" class="search-icon"/>
+            <img src="assets/search.svg" draggable="false" class="search-icon prevent-select"/>
         </div>
         <div class="headerChild homeBtn prevent-select"
             onclick="navigate('/movies')"
@@ -76,9 +76,15 @@
         </div>
         <div class="sections">
             <div class="left">
-                <div class="profile-photo prevent-select">
-                    Profile Photo
-                </div>
+                <?php
+                    if($photo) {
+                        echo "<img class='profile-photo prevent-select' draggable='false' src='$photo' />";
+                    }else {
+                        echo'<div class="profile-photo prevent-select">
+                                Profile Photo
+                            </div>';
+                    }
+                ?>
                 <span class="favorite-films-section prevent-select">
                     Favorite Films:
                 </span>

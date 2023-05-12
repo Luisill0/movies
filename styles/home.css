@@ -17,11 +17,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
     color: #CCE3DE;
     font-size: 3rem;
     text-align: center;
     background-color: #153243;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: 2px solid #153243;
 }
 
 .content .movies-container .movie:hover {
@@ -38,10 +42,12 @@
     justify-content: center;
     font-size: 1.3rem;
     color: #153243;
+    margin-bottom: 5rem;
+    visibility: hidden;
 }
 
 .content .movies-container .movie:hover > .info {
-    opacity: 50%;
+    visibility: inherit;
 }
 
 @media screen and (max-width: 681px) 

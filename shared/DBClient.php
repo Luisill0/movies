@@ -135,8 +135,6 @@ class DBClient {
         }
 
         $link = $this->connect('users');
-        
-        echo "query: ".$query_set;
 
         $query = $link->prepare(
             'UPDATE users SET '.$query_set.'WHERE user_id='.$user_id
@@ -169,11 +167,30 @@ class DBClient {
         return $query->execute() ? true : false;
     }
 
+    public function getMovieByName(string $title) {
+        $link = $this->connect('users');
+
+        $query = $link->prepare(
+            "SELECT title, poster, plot FROM movies WHERE title='$title'"
+        );
+
+        if($query->execute()){
+            $row = $query->fetch(PDO::FETCH_NUM);
+            if($row) {
+                return $row[0];
+            }else {
+                return null;
+            }
+        }else {
+            return null;
+        }
+    }
+
     public function getMoviePosterByName(string $title) {
         $link = $this->connect('users');
 
         $query = $link->prepare(
-            "SELECT poster from movies WHERE title='$title'"
+            "SELECT poster FROM movies WHERE title='$title'"
         );
 
         if($query->execute()){
@@ -182,6 +199,31 @@ class DBClient {
                 return $row[0];
             }
             else {
+                return null;
+            }
+        }else {
+            return null;
+        }
+    }
+
+    public function getPopularMovies() {
+        $link = $this->connect('users');
+
+        $query = $link->prepare(
+            "SELECT title, poster FROM movies"
+        );
+
+        if($query->execute()){
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            if($data){
+                $rand_keys = array_rand($data,4);
+                return array(
+                    $data[$rand_keys[0]],
+                    $data[$rand_keys[1]],
+                    $data[$rand_keys[2]],
+                    $data[$rand_keys[3]]
+                );
+            }else {
                 return null;
             }
         }else {

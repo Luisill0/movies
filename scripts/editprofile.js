@@ -8,10 +8,17 @@ const previewImg = () => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-        const imageElement = document.createElement('img');
-        imageElement.draggable = false;
-        imageElement.src = reader.result;
-        imageInputLabel.innerText = '';
-        imageInputLabel.appendChild(imageElement);
+        const pfp = document.getElementById('pfp');
+        if(pfp){
+            pfp.src=reader.result;
+        }else {
+            const imageElement = document.createElement('img');
+            imageElement.draggable = false;
+            imageElement.src = reader.result;
+            imageInputLabel.innerText = '';
+            imageInputLabel.appendChild(imageElement);
+        }
+        const hiddenInput = document.getElementById('image-url');
+        hiddenInput.value = reader.result;
     }
 }

@@ -10,15 +10,17 @@
         $profile_username = $row[0];
         $profile_email = $row[1];
         $profile_about = $row[2];
-        $profile_favorites = $row[3];
-        $profile_photo = $row[4];
+        $profile_photo = $row[3];
+        $profile_favorite1 = $row[4];
+        $profile_favorite2 = $row[5];
+        $profile_favorite3 = $row[6];
     }
     else {
         header('Location: http://localhost/movies/home');
     }
 
     if(
-        isset($_POST['email']) || isset($_POST['about']) || isset($_POST['photo']) ||
+        isset($_POST['email']) || isset($_POST['about']) || isset($_POST['imageURL']) ||
         isset($_POST['favorite1']) || isset($_POST['favorite2']) || isset($_POST['favorite3'])
     ) {
         $email = isset($_POST['email']) ? strtolower($_POST['email']) : null;
@@ -27,8 +29,8 @@
         $favorite2 = isset($_POST['favorite2']) ? $_POST['favorite2'] : null;
         $favorite3 = isset($_POST['favorite3']) ? $_POST['favorite3'] : null;
         
-        $photo = isset($_POST['photo']) ? $_POST['photo'] : null;
-        
+        $photo = isset($_POST['imageURL']) ? $_POST['imageURL'] : null;
+
         unset($_POST['email']);
         unset($_POST['about']);
         unset($_POST['favorite1']);
@@ -37,11 +39,15 @@
         unset($_POST['photo']);
 
         $client = new DBClient(user:'root', passwd:'');
-        $result = $client->updateUserInfo(
-            $uid, $email, $about, $favorite1, $favorite2, $favorite3, $photo
-        );
+        try{
+            $result = $client->updateUserInfo(
+                $uid, $email, $about, $favorite1, $favorite2, $favorite3, $photo
+            );
+        }catch(Exception $ex){
+            print_r($ex);
+        }
         if($result){
-            header('Location: http://localhost/profile.php');
+            header('Location: http://localhost/movies/profile.php');
         }
     }
 ?>
@@ -98,7 +104,7 @@
                                 id='about'
                                 name='about'
                                 <?php
-                                    echo 'placeholder='.$profile_about;
+                                    echo 'placeholder='.str_replace(' ','-',$profile_about);
                                 ?>
                             ></textarea>
                         </div>
@@ -108,19 +114,28 @@
                                 <div class='col-sm-4'>
                                     <input class='form-control text-box no-focus'
                                         name='favorite1'
-                                        type='text' placeholder='title (year)'
+                                        type='text' 
+                                        <?php
+                                            echo 'placeholder='.str_replace(' ','-',$profile_favorite1);
+                                        ?>
                                     />
                                 </div>
                                 <div class='col-sm-4'>
                                     <input class='form-control text-box no-focus'
                                         name='favorite2'
-                                        type='text' placeholder='title (year)'
+                                        type='text'
+                                        <?php
+                                            echo 'placeholder='.str_replace(' ','-',$profile_favorite2);
+                                        ?>
                                     />
                                 </div>
                                 <div class='col-sm-4'>
                                     <input class='form-control text-box no-focus'
                                         name='favorite3'
-                                        type='text' placeholder='title (year)'
+                                        type='text'
+                                        <?php
+                                            echo 'placeholder='.str_replace(' ','-',$profile_favorite3);
+                                        ?>
                                     />
                                 </div>
                             </div>
@@ -134,7 +149,13 @@
                                     class='d-flex justify-content-center align-items-center fs-1' 
                                     id='add-img-label' for='add-image'
                                 >
-                                    +
+                                    <?php
+                                        if($profile_photo){
+                                            echo "<img id='pfp' draggable='false' src='$profile_photo' />";
+                                        }else {
+                                            echo "+";
+                                        }
+                                    ?>
                                 </label>
                                 <input 
                                     type='file' id='add-image'
@@ -145,6 +166,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type='hidden' name='imageURL' id='image-url' />
                     <div class='row'>
                         <div class='col-auto ps-4'>
                             <button type="submit" class="btn mb-2 px-3 py-2" id='btn-submit'>
