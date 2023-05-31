@@ -67,9 +67,17 @@
 </head>
 <body>
     <div class='header'>
-        <div class='headerChild searchbar'>
-            <input class='search-text' type='text' placeholder='search' required/> 
-            <img src='assets/search.svg' class='search-icon'/>
+        <div class="headerChild searchbar">
+            <form id='search-form' action='/movies/search.php' method='get'>
+                <input class="search-text" id='search-bar-input' 
+                    type="text" placeholder="search" name='title'
+                    required
+                /> 
+                <img src="assets/search.svg" draggable="false" 
+                    class="search-icon prevent-select"
+                    onclick="search()"
+                />
+            </form>
         </div>
         <div class='headerChild homeBtn prevent-select'
             onclick='navigate("/movies")'
@@ -159,7 +167,7 @@
                                 </label>
                                 <input 
                                     type='file' id='add-image'
-                                    accept='image/jpeg, image/png'
+                                    accept='image/jpeg image/png image/jpg'
                                     name='photo'
                                     onchange='previewImg()'
                                 />

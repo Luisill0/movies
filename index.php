@@ -22,8 +22,16 @@
 <body>
     <div class="header">
         <div class="headerChild searchbar">
-            <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="assets/search.svg" draggable="false" class="search-icon prevent-select"/>
+            <form id='search-form' action='/movies/search.php' method='get'>
+                <input class="search-text" id='search-bar-input' 
+                    type="text" placeholder="search" name='title'
+                    required
+                /> 
+                <img src="assets/search.svg" draggable="false" 
+                    class="search-icon prevent-select"
+                    onclick="search()"
+                />
+            </form>
         </div>
         <div class="headerChild homeBtn prevent-select"
             <?php
@@ -52,7 +60,9 @@
                 <?php
                     if($popular_movies){
                         $poster_url=$popular_movies[0]['poster'];
-                        echo"style=background-image:url('$poster_url');";
+                        $movie_id=$popular_movies[0]['movie_id'];
+                        echo"style=background-image:url('$poster_url'); ";
+                        echo"onclick=\"navigate('/movies/movie.php?id=$movie_id')\"";
                     }
                 ?>
             >
@@ -60,7 +70,8 @@
                     <?php
                         if($popular_movies){
                             $title=$popular_movies[0]['title'];
-                            echo $title;
+                            $year=$popular_movies[0]['year'];
+                            echo "$title ($year)";
                         }
                     ?>
                 </div>
@@ -69,7 +80,9 @@
                 <?php
                     if($popular_movies){
                         $poster_url=$popular_movies[1]['poster'];
-                        echo"style=background-image:url('$poster_url');";
+                        $movie_id=$popular_movies[1]['movie_id'];
+                        echo"style=background-image:url('$poster_url'); ";
+                        echo"onclick=\"navigate('/movies/movie.php?id=$movie_id')\"";
                     }
                 ?>
             >
@@ -77,7 +90,8 @@
                     <?php
                         if($popular_movies){
                             $title=$popular_movies[1]['title'];
-                            echo $title;
+                            $year=$popular_movies[1]['year'];
+                            echo "$title ($year)";
                         }
                     ?>
                 </div>
@@ -86,15 +100,18 @@
                 <?php
                     if($popular_movies){
                         $poster_url=$popular_movies[2]['poster'];
-                        echo"style=background-image:url('$poster_url');";
+                        $movie_id=$popular_movies[2]['movie_id'];
+                        echo"style=background-image:url('$poster_url'); ";
+                        echo"onclick=\"navigate('/movies/movie.php?id=$movie_id')\"";
                     }
-                ?>        
+                ?>
             >
                 <div class="info">
                     <?php
                         if($popular_movies){
                             $title=$popular_movies[2]['title'];
-                            echo $title;
+                            $year=$popular_movies[2]['year'];
+                            echo "$title ($year)";
                         }
                     ?>
                 </div>
@@ -103,15 +120,18 @@
                 <?php
                     if($popular_movies){
                         $poster_url=$popular_movies[3]['poster'];
-                        echo"style=background-image:url('$poster_url');";
+                        $movie_id=$popular_movies[3]['movie_id'];
+                        echo"style=background-image:url('$poster_url'); ";
+                        echo"onclick=\"navigate('/movies/movie.php?id=$movie_id')\"";
                     }
-                ?> 
+                ?>
             >
                 <div class="info">
                     <?php
                         if($popular_movies){
                             $title=$popular_movies[3]['title'];
-                            echo $title;
+                            $year=$popular_movies[3]['year'];
+                            echo "$title ($year)";
                         }
                     ?>
                 </div>

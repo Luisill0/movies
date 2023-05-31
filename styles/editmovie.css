@@ -1,0 +1,14 @@
+#edit-movie-page #btn-submit {
+    background-color: #153243;
+    color: #CCE3DE;
+    border: 0;
+}
+
+#edit-movie-page #btn-submit:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+#edit-movie-page #btn-submit:active {
+    background-color: #306f94;
+}

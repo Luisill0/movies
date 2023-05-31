@@ -3,12 +3,45 @@
     cursor: pointer;
 }
 
+.disabled {
+    opacity: 50%;
+}
+
+.disabled:hover {
+    cursor: default;
+}
+
 .content .title {
     padding: 25px 0 0 50px;
     font-size: 2.5em;
     color: #153243;
     font-weight: bold;
+    display: flex;
 }
+
+.content a {
+    display: flex;
+}
+
+.content #button-delete {
+    background-color: rgb(155, 0, 0);
+    color: #CCE3DE;
+    border: 0;
+    border-radius: 15px;
+    font-size: 1.25rem;
+    padding: 12px;
+    margin-left: 30px;
+}
+
+.content #button-edit {
+    background-color: #153243;
+    color:#CCE3DE;
+    border: 0;
+    border-radius: 15px;
+    font-size: 1.25rem;
+    padding: 12px 30px;
+    margin-left: 30px;
+} 
 
 .content .centered-container {
     display: flex;
@@ -24,6 +57,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-size: cover;
+    background-position: center;
 }
 
 .content .plot {
@@ -34,7 +69,11 @@
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
+}
+
+.content .plot #plot-text{
+    margin: 2rem;
+    line-height: 2rem;
 }
 
 .content .stats {
@@ -42,6 +81,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     background-color: #153243;
+    color: #153243;
     width: 20%;
     border-radius: 20px;
     overflow: none;
@@ -49,7 +89,6 @@
 
 .content .stats .stat {
     background-color: #A4C3B2;
-    color: #CCE3DE;
     border-radius: 20px;
     margin: 20px 20px;
     display: flex;
@@ -86,14 +125,53 @@
     width: 40%;
     color: #CCE3DE;
     border-radius: 20px;
-    padding: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
 }
+
+.content .reviews-section #username {
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+
+.content .reviews-section #username:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+@media screen and (min-width:681px) and (max-width: 1281px) {
+    .content .title {
+        font-size: 1.5rem;
+        padding: 0;
+        text-align: center;
+        justify-content: center;
+        padding-top: 25px;
+    }
+    .content .centered-container {
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 20px;
+    }
+    .content .centered-container .poster {
+        width: 12rem;
+        height: 17rem;
+        order: 2;
+        text-align: center;
+    }
+    .content .centered-container .stats {
+        order:3;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 681px)
 {
     .content .title {
         font-size: 1.5rem;
         padding: 0;
         text-align: center;
+        justify-content: center;
         padding-top: 25px;
     }
     .content .centered-container {
@@ -111,7 +189,14 @@
         height: 10rem;
         width: 50%;
         order: 1;
+        font-size: 0.75rem;
+        line-height: 0.5;
         text-align: center;
+        overflow: scroll;
+    }
+    .content .plot #plot-text {
+        line-height: 2;
+        margin: 10px;
     }
     .content .centered-container .stats {
         order:3;

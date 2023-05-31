@@ -47,6 +47,21 @@
     cursor: pointer;
 }
 
+.content .credentials-form .sign-up-text {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.content .credentials-form .sign-up-text #sign-up {
+    margin-left: 5px;
+    text-decoration: underline;
+}
+
+.content .credentials-form .sign-up-text #sign-up:hover {
+    cursor: pointer;
+    opacity: 50%;
+}
+
 @media screen and (max-width: 681px)
 {
     .content .sign-in {

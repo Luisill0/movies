@@ -32,8 +32,16 @@
 <body>
     <div class="header">
         <div class="headerChild searchbar">
-            <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="assets/search.svg" class="search-icon"/>
+            <form id='search-form' action='/movies/search.php' method='get'>
+                <input class="search-text" id='search-bar-input' 
+                    type="text" placeholder="search" name='title'
+                    required
+                /> 
+                <img src="assets/search.svg" draggable="false" 
+                    class="search-icon prevent-select"
+                    onclick="search()"
+                />
+            </form>
         </div>
         <div class="headerChild homeBtn prevent-select"
             onclick="navigate('/movies')"
@@ -57,6 +65,12 @@
                 <input type="password" id="password" name="password"
                 required
                 >
+            </div>
+            <div class='sign-up-text prevent-select'>
+                Don't have an account? 
+                <div id='sign-up' onclick="navigate('/movies/signup.php')">
+                    Sign Up
+                </div>
             </div>
             <input class="sign-in-btn" type="submit" value="Sign In">
         </form>

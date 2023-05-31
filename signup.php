@@ -8,16 +8,17 @@
         $email = strtolower($_POST['email']);
         $password = $_POST['password'];
 
+        unset($_POST['username']);
+        unset($_POST['email']);
+        unset($_POST['password']);
+
         $client = new DBClient(user:'root', passwd:'');
         $result = $client->addUser(username:$username,email:$email,password:$password);
         if($result){
             $_SESSION['current_user']=$result;
-            header('Location: http://localhost/movies');
+            header('Location: /movies/');
         }
     }
-    unset($_POST['username']);
-    unset($_POST['email']);
-    unset($_POST['password']);
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +34,16 @@
 <body onload="checkPassword()">
     <div class="header">
         <div class="headerChild searchbar">
-            <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="assets/search.svg" class="search-icon"/>
+            <form id='search-form' action='/movies/search.php' method='get'>
+                <input class="search-text" id='search-bar-input' 
+                    type="text" placeholder="search" name='title'
+                    required
+                /> 
+                <img src="assets/search.svg" draggable="false" 
+                    class="search-icon prevent-select"
+                    onclick="search()"
+                />
+            </form>
         </div>
         <div class="headerChild homeBtn prevent-select"
             onclick="navigate('/home')"
@@ -46,7 +55,7 @@
         <div class="sign-up prevent-select">
             <span>Sign Up</span>
         </div>
-        <form class="credentials-form" action="index.php" method="post">
+        <form class="credentials-form" action="signup.php" method="post">
             <div class="username input-field">
                 <label for="username" class="prevent-select">Username:</label>
                 <input type="text" id="username" name="username"

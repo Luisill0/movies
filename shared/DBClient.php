@@ -84,6 +84,21 @@ class DBClient {
         }
     }
 
+    public function getUserName(int $user_id):string | null {
+        $link = $this->connect('users');
+        $query = $link->prepare(
+            "SELECT username FROM users WHERE user_id=$user_id"
+        );
+
+        if($query->execute()) {
+            $data = $query->fetch(PDO::FETCH_NUM);
+            if($data){
+                return $data[0];
+            }
+        }
+        return null;
+    }
+
     public function isAdmin(int $user_id):bool {
         $link = $this->connect('users');
         $query = $link->prepare("SELECT admin FROM users WHERE user_id=$user_id");
@@ -154,55 +169,61 @@ class DBClient {
     ***********************************************/
 
     public function addMovie(
-        string $title, 
+        string $title,
+        string $year,
         string $plot, 
         string $poster
     ):bool {
         $link = $this->connect('users');
 
         $query = $link->prepare(
-            "INSERT INTO movies (title, plot, poster) VALUES ('$title', '$plot', '$poster')"
+            "INSERT INTO movies (title, year, plot, poster) VALUES ('$title', '$year', '$plot', '$poster')"
         );
 
         return $query->execute() ? true : false;
     }
 
-    public function getMovieByName(string $title) {
+    public function getMovieById(string $id) {
         $link = $this->connect('users');
 
         $query = $link->prepare(
-            "SELECT title, poster, plot FROM movies WHERE title='$title'"
+            "SELECT * FROM movies WHERE movie_id=$id"
         );
 
         if($query->execute()){
-            $row = $query->fetch(PDO::FETCH_NUM);
-            if($row) {
-                return $row[0];
-            }else {
-                return null;
+            $row = $query->fetchAll(PDO::FETCH_NAMED)[0];
+            if($row){
+                return $row;
             }
-        }else {
-            return null;
         }
+        return null;
     }
 
-    public function getMoviePosterByName(string $title) {
+    public function getMovieByName(string $name) {
         $link = $this->connect('users');
 
         $query = $link->prepare(
-            "SELECT poster FROM movies WHERE title='$title'"
+            "SELECT * FROM movies WHERE title='$name'"
         );
 
         if($query->execute()){
-            $row = $query->fetch(PDO::FETCH_NUM);
-            if($row) {
-                return $row[0];
+            $row = $query->fetchAll(PDO::FETCH_NAMED)[0];
+            if($row){
+                return $row;
             }
-            else {
-                return null;
-            }
-        }else {
-            return null;
+        }
+        return null;
+    }
+
+    public function getMoviePosterByName(string $name) {
+        $link = $this->connect('users');
+        
+        $query = $link->prepare(
+            "SELECT poster FROM movies WHERE title='$name'"
+        );
+
+        if($query->execute()){
+            return $query->fetch(PDO::FETCH_NUM)[0];
         }
     }
 
@@ -210,26 +231,119 @@ class DBClient {
         $link = $this->connect('users');
 
         $query = $link->prepare(
-            "SELECT title, poster FROM movies"
+            "
+            SELECT m.movie_id, m.title, m.year, m.poster, COUNT(r.movie_id) AS review_count
+            FROM movies m
+            LEFT JOIN reviews r ON m.movie_id = r.movie_id
+            GROUP BY m.movie_id, m.title
+            ORDER BY review_count DESC
+            LIMIT 4;
+            "
         );
 
         if($query->execute()){
-            $data = $query->fetchAll(PDO::FETCH_ASSOC);
-            if($data){
-                $rand_keys = array_rand($data,4);
-                return array(
-                    $data[$rand_keys[0]],
-                    $data[$rand_keys[1]],
-                    $data[$rand_keys[2]],
-                    $data[$rand_keys[3]]
-                );
-            }else {
-                return null;
-            }
+            $data = $query->fetchAll(PDO::FETCH_NAMED);
+            return $data ? $data : null;
         }else {
             return null;
         }
     }
-}
 
+    public function getAllMovies() {
+        $link = $this->connect('users');
+        $query = $link->prepare(
+            "SELECT * FROM movies"
+        );
+
+        if($query->execute()) {
+            $data = $query->fetchAll(PDO::FETCH_NAMED);
+            return $data ?? null;
+        }
+    }
+
+    public function deleteMovie(int $movie_id) {
+        $link = $this->connect('users');
+
+        $query = $link->prepare(
+            "DELETE FROM movies WHERE movie_id=$movie_id"
+        );
+
+        return $query->execute();
+    }
+
+    public function editMovie(
+        int $movie_id,
+        string $title,
+        string $year,
+        string $plot,
+        string $poster
+    ):bool {
+        $link = $this->connect('users');
+
+        $query = $link->prepare(
+            "UPDATE movies
+            SET title='$title', year='$year', plot='$plot', poster='$poster'
+            WHERE movie_id=$movie_id
+            "
+        );
+
+        return $query->execute();
+    }
+
+    /***********************************************
+    *                REVIEWS FUNCS                 *
+    ***********************************************/
+
+    public function reviewMovie(
+        int $user_id,
+        int $movie_id,
+        string $rating,
+        string $review,
+        mixed $date
+    ) {
+        $link = $this->connect('users');
+
+        $query = $link->prepare(
+            "
+            INSERT INTO reviews 
+            (user_id, movie_id, rating, review, date) VALUES
+            ($user_id, $movie_id, '$rating', '$review', '$date')
+            "
+        );
+
+        return $query->execute() ? true : false;
+    }
+
+    public function getReviews(int $movie_id) {
+        $link = $this->connect('users');
+
+        $query = $link->prepare(
+            "SELECT * FROM reviews WHERE movie_id=$movie_id"
+        );
+
+        if($query->execute()){
+            $data = $query->fetchAll(PDO::FETCH_NAMED);
+            if($data){
+                return $data;
+            }
+        }
+        return null;
+    }
+
+    public function hasReviewed(int $user_id, int $movie_id) {
+        $link = $this->connect('users');
+
+        $query = $link->prepare(
+            "
+            SELECT COUNT(*) FROM reviews WHERE user_id=$user_id AND
+            movie_id=$movie_id
+            "
+        );
+
+        if($query->execute()){
+            $data = $query->fetch(PDO::FETCH_NUM)[0];
+            return $data > 0;
+        }
+    }
+}
 ?>

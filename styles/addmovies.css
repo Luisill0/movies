@@ -1,0 +1,13 @@
+#admin-page-content #btn-submit {
+    background-color: #153243;
+    color: #CCE3DE;;
+}
+
+#admin-page-content #btn-submit:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+#admin-page-content #btn-submit:active {
+    background-color: #306f94;
+}

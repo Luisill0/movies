@@ -25,18 +25,22 @@
         $photo = $row[3];
         $favorite1 = $row[4];
         $favorite2 = $row[5];
-        $favorite3 = $row[6];
+        $favorite3 = $row[6];       
+    }
+
+    if($my_uid){
+        $isAdmin = $client->isAdmin($my_uid);
     }
 
     try {
         if($favorite1){
-            $poster1 = $client->getMoviePosterByName($favorite1);
+            $movie1 = $client->getMovieByName($favorite1);
         }
         if($favorite2){
-            $poster2 = $client->getMoviePosterByName($favorite2);
+            $movie2 = $client->getMovieByName($favorite2);
         }
         if($favorite3){
-            $poster3 = $client->getMoviePosterByName($favorite3);
+            $movie3 = $client->getMovieByName($favorite3);
         }
     }catch(Exception $ex){
         print_r($ex);
@@ -48,7 +52,6 @@
 <head>
     <title>Profile</title>
     <script src="shared/script.js" type="text/javascript"></script>
-    <script src="script.js" type="text/javascript"></script>
     <link rel="stylesheet" href="shared/style.css" type="text/css"/>
     <link rel="stylesheet" href="styles/profile.css" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -56,8 +59,16 @@
 <body>
     <div class="header">
         <div class="headerChild searchbar">
-            <input class="search-text" type="text" placeholder="search" required/> 
-            <img src="assets/search.svg" draggable="false" class="search-icon prevent-select"/>
+            <form id='search-form' action='/movies/search.php' method='get'>
+                <input class="search-text" id='search-bar-input' 
+                    type="text" placeholder="search" name='title'
+                    required
+                /> 
+                <img src="assets/search.svg" draggable="false" 
+                    class="search-icon prevent-select"
+                    onclick="search()"
+                />
+            </form>
         </div>
         <div class="headerChild homeBtn prevent-select"
             onclick="navigate('/movies')"
@@ -71,6 +82,16 @@
             <?php
                 if($profile_uid == $my_uid) {
                     echo '<a href="/movies/editprofile.php"><div class="editBtn">Edit</div></a>';
+                }
+            ?>
+            <?php
+                if($isAdmin) {
+                    echo '<a href="/movies/admin.php"><div id="admin-btn" class="editBtn">Admin</div></a>';
+                }
+            ?>
+            <?php
+                if($profile_uid == $my_uid) {
+                    echo '<a href="/movies/logout.php"><div id="logout-btn" class="editBtn">Log Out</div></a>';
                 }
             ?>
         </div>
@@ -91,45 +112,54 @@
                 <div class="favorite-films">
                     <div class="movie"
                         <?php
-                            if($poster1){
-                                echo "style='background-image: url($poster1)'";
+                            if($movie1){
+                                $poster = $movie1['poster'];
+                                echo "style='background-image: url($poster)' ";
+                                $movie_id = $movie1['movie_id'];
+                                echo "onclick=\"navigate('/movies/movie.php?id=$movie_id')\"";
                             }
                         ?>
                     >
                         <div class="info">
                             <?php 
-                                echo $favorite1 ?
-                                    $favorite1 :
+                                echo $movie1 ?
+                                    $movie1['title']."(".$movie1['year'].")" :
                                     "Movie Title (Year)";
                             ?>
                         </div>
                     </div>
                     <div class="movie"
                         <?php
-                            if($poster2){
-                                echo "style='background-image: url($poster2)'";
+                            if($movie2){
+                                $poster = $movie2['poster'];
+                                $movie_id = $movie2['movie_id'];
+                                echo "style='background-image: url($poster)' ";
+                                echo "onclick=\"navigate('/movies/movie.php?id=$movie_id')\"";
                             }
                         ?>
                     >
                         <div class="info">
                             <?php 
-                                echo $favorite2 ?
-                                    $favorite2 :
+                                echo $movie2 ?
+                                    $movie2['title']."(".$movie2['year'].")" :
                                     "Movie Title (Year)";
                             ?>
                         </div>
                     </div>
                     <div class="movie"
                         <?php
-                            if($poster3){
-                                echo "style='background-image: url($poster3)'";
+                            if($movie3){
+                                $poster = $movie3['poster'];
+                                $movie_id = $movie3['movie_id'];
+                                echo "style='background-image: url($poster)' ";
+                                echo "onclick=\"navigate('/movies/movie.php?id=$movie_id')\"";
                             }
                         ?>
                     >
                         <div class="info">
                             <?php 
-                                echo $favorite3 ?
-                                    $favorite3 :
+                                echo $movie3 ?
+                                    $movie3['title']."(".$movie3['year'].")" :
                                     "Movie Title (Year)";
                             ?>
                         </div>
